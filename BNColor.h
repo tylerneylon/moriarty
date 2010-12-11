@@ -31,11 +31,30 @@
 + (BNColor *)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue;
 
 - (void)setWithHue:(float)h saturation:(float)s value:(float)v;
+
 - (void)setFill;
+- (void)setStroke;
 - (UIColor *)colorFromBNColor;
 
 - (NSString *)hexCode;
 - (NSString *)decString;
 - (NSString *)percentString;
+
+// Named colors, for convenience.
++ (BNColor *)redColor;
++ (BNColor *)orangeColor;
++ (BNColor *)yellowColor;
++ (BNColor *)greenColor;
++ (BNColor *)blueColor;
++ (BNColor *)purpleColor;
+
++ (BNColor *)magentaColor;
++ (BNColor *)cyanColor;
++ (BNColor *)brownColor;
+
++ (BNColor *)blackColor;
++ (BNColor *)darkGrayColor;
++ (BNColor *)lightGrayColor;
++ (BNColor *)whiteColor;
 
 @end

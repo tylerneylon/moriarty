@@ -120,6 +120,11 @@
   CGContextSetRGBFillColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
 }
 
+- (void)setStroke {
+  CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(),
+                             red, green, blue, 1.0);
+}
+
 - (UIColor *)colorFromBNColor {
   return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
 }
@@ -143,6 +148,61 @@
   return [NSString stringWithFormat:@"%@ <%p> RGB = (%.2f, %.2f, %.2f) HSV = (%.2f, %.2f, %.2f)",
           [self class], self, red, green, blue, self.hue, self.saturation, self.value];
 }
+
+#pragma mark named colors
+
++ (BNColor *)redColor {
+  return [BNColor colorWithRed:1 green:0 blue:0];
+}
+
++ (BNColor *)orangeColor {
+  return [BNColor colorWithRed:1 green:0.5 blue:0];
+}
+
++ (BNColor *)yellowColor {
+  return [BNColor colorWithRed:1 green:1 blue:0];
+}
+
++ (BNColor *)greenColor {
+  return [BNColor colorWithRed:0 green:1 blue:0];
+}
+
++ (BNColor *)blueColor {
+  return [BNColor colorWithRed:0 green:0 blue:1];
+}
+
++ (BNColor *)purpleColor {
+  return [BNColor colorWithRed:0.5 green:0 blue:0.5];
+}
+
++ (BNColor *)magentaColor {
+  return [BNColor colorWithRed:1 green:0 blue:1];
+}
+
++ (BNColor *)cyanColor {
+  return [BNColor colorWithRed:0 green:1 blue:1];
+}
+
++ (BNColor *)brownColor {
+  return [BNColor colorWithRed:0.6 green:0.4 blue:0.2];
+}
+
++ (BNColor *)blackColor {
+  return [BNColor colorWithRed:0 green:0 blue:0];
+}
+
++ (BNColor *)darkGrayColor {
+  return [BNColor colorWithRed:1.0/3.0 green:1.0/3.0 blue:1.0/3.0];
+}
+
++ (BNColor *)lightGrayColor {
+  return [BNColor colorWithRed:2.0/3.0 green:2.0/3.0 blue:2.0/3.0];
+}
+
++ (BNColor *)whiteColor {
+  return [BNColor colorWithRed:1 green:1 blue:1];
+}
+
 
 #pragma mark NSCopying methods
 
