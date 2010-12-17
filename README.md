@@ -9,7 +9,7 @@ https://github.com/tylerneylon/moriarty
 NSObject+Be
 -----------
 
-This category is designed to help with memory management.  Specifically, this makes it easy to only work with autoreleased objects outside of a small number of ownership-allowed methods.  The rules suggested for use with this category are described (here)[http://bynomial.com/blog/?p=65].
+This category is designed to help with memory management.  Specifically, this makes it easy to only work with autoreleased objects outside of a small number of ownership-allowed methods.  The rules suggested for use with this category are described [here](http://bynomial.com/blog/?p=65).
 
 
 UIView+Position
@@ -25,7 +25,7 @@ With this category, you can achieve the desired effect with code like this:
 
 myView.frameX += 10;
 
-(Here's the post about this class.)[http://bynomial.com/blog/?p=24]
+[Here's the post about this class.](http://bynomial.com/blog/?p=24)
 
 
 BNColor
@@ -33,14 +33,14 @@ BNColor
 
 UIColor is not mutable; this class is.  This also allows changes in both RGB and HSV color spaces (with conversion between the two).
 
-(Here's the post about this class.)[http://bynomial.com/blog/?p=100]
+[Here's the post about this class.](http://bynomial.com/blog/?p=100)
 
 BNPieChart
 ----------
 
 A UIView subclass for rendering very nice-looking pie charts.
 
-(Here's the post about this class.)[http://bynomial.com/blog/?p=104]
+[Here's the post about this class.](http://bynomial.com/blog/?p=104)
 
 uncrustify.cfg
 --------------
@@ -55,4 +55,4 @@ I suggest installing UniversalIndentGUI, which includes uncrustify as a componen
 
 http://universalindent.sourceforge.net/
 
-(Here's the post about this file.)[http://bynomial.com/blog/?p=109]
+[Here's the post about this file.](http://bynomial.com/blog/?p=109)
