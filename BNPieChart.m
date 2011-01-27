@@ -20,7 +20,7 @@
 @interface BNPieChart ()
 
 - (void)drawSlice:(int)index inContext:(CGContextRef)context;
-- (CGGradientRef)createGradientForIndex:(int)index;
+- (CGGradientRef)newGradientForIndex:(int)index;
 - (void)addLabelForLastName;
 - (void)getRGBForIndex:(int)index red:(float *)red green:(float *)green blue:(float *)blue;
 - (float)approxDistFromCenter:(CGRect)rect;
@@ -161,7 +161,7 @@
 	CGContextSaveGState(context);
 	CGContextAddPath(context, path);
 	CGContextClip(context);
-	CGGradientRef gradient = [self createGradientForIndex:index];
+	CGGradientRef gradient = [self newGradientForIndex:index];
 	CGContextDrawLinearGradient(context, gradient,
                               CGPointMake(centerX + radius, centerY),
                               CGPointMake(centerX - radius, centerY), 0);
@@ -182,7 +182,7 @@
 	CGPathRelease(path);
 }
 
-- (CGGradientRef)createGradientForIndex:(int)index {
+- (CGGradientRef)newGradientForIndex:(int)index {
 	size_t num_locations = 2;
 	CGFloat locations[2] = {0.0, 1.0};
 	CGFloat red, green, blue;
