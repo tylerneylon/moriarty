@@ -94,10 +94,12 @@
 
 - (void)centerVerticallyInSuperview
 {
-	self.frameY = (int)((self.superview.bounds.size.height - self.frameHeight) / 2);@end
+	self.frameY = (int)((self.superview.bounds.size.height - self.frameHeight) / 2);
 }
 
 - (void)centerHorizontallyInSuperview
 {
 	self.frameX = (int)((self.superview.bounds.size.width - self.frameWidth) / 2);
 }
+
+@end
