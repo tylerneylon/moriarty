@@ -3,7 +3,7 @@
 //  MadTiles
 //
 //  Created by Tyler Neylon on 10/18/10.
-//  Copyright 2010 Bynomial. All rights reserved.
+//  Copyleft 2010 Bynomial.
 //
 //  A helper class to easily determine how
 //  many times an app has been opened or initialized.
