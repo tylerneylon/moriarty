@@ -29,12 +29,14 @@
 @property (nonatomic) float value;
 
 + (BNColor *)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue;
++ (BNColor *)colorFromRGBHexString:(NSString *)rgbString;
 
 - (void)setWithHue:(float)h saturation:(float)s value:(float)v;
 
 - (void)setFill;
 - (void)setStroke;
-- (UIColor *)colorFromBNColor;
+- (UIColor *)colorFromBNColor __attribute__((deprecated));  // Use the UIColor method instead; more traditional name.
+- (UIColor *)UIColor;
 
 - (NSString *)hexCode;
 - (NSString *)decString;

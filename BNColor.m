@@ -7,6 +7,8 @@
 
 #import "BNColor.h"
 
+#import "NSObject+Be.h"
+
 #define kRedKey @"r"
 #define kGreenKey @"g"
 #define kBlueKey @"b"
@@ -28,6 +30,20 @@
   color.red = red;
   color.green = green;
   color.blue = blue;
+  return color;
+}
+
++ (BNColor *)colorFromRGBHexString:(NSString *)rgbString {  
+  int component[3];
+  for (int i = 0; i < 3; ++i) {
+    sscanf([[rgbString substringWithRange:NSMakeRange(i * 2, 2)] UTF8String], "%X", component + i);
+  }
+  
+  BNColor *color = [BNColor beInit];
+  color.red = (component[0] / 255.0);
+  color.green = (component[1] / 255.0);
+  color.blue = (component[2] / 255.0);
+  
   return color;
 }
 
@@ -126,6 +142,10 @@
 }
 
 - (UIColor *)colorFromBNColor {
+  return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+}
+
+- (UIColor *)UIColor {
   return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
 }
 
