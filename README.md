@@ -42,6 +42,28 @@ A UIView subclass for rendering very nice-looking pie charts.
 
 [Here's the post about this class.](http://bynomial.com/blog/?p=104)
 
+WipeView
+--------
+
+A UIView subclass for showing a wipe-vanish animation of an image.
+
+This is a wipe animation (you can do them in other directions than this):
+
+    //  1.  /----\
+    //      |----|
+    //      \----/
+    //  2.    ---\
+    //        ---|
+    //        ---/
+    //  3.      -\
+    //          -|
+    //          -/
+    //  4.
+    //
+    //
+
+[Here's the post about this class.](http://bynomial.com/blog/?p=130)
+
 uncrustify.cfg
 --------------
 
