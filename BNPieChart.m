@@ -82,6 +82,7 @@
 	[sliceNames release];
 	[nameLabels release];
 	CFRelease(colorspace);
+  self.colors = nil;
   [super dealloc];
 }
 
