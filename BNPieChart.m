@@ -8,6 +8,8 @@
 
 #import "BNPieChart.h"
 
+#import "BNColor.h"
+
 // This determines the distance between the pie chart and the labels,
 // or the frame, if no labels are present.
 // Examples: if this is 1.0, then they are flush, if it's 0.5, then
@@ -34,7 +36,7 @@
 
 @implementation BNPieChart
 
-@synthesize slicePortions;
+@synthesize slicePortions, colors;
 
 + (BNPieChart *)pieChartSampleWithFrame:(CGRect)frame {
 	BNPieChart *chart = [[[BNPieChart alloc]
@@ -262,6 +264,13 @@
 }
 
 - (void)getRGBForIndex:(int)index red:(float *)red green:(float *)green blue:(float *)blue {
+  if (colors) {
+    BNColor *color = [colors objectAtIndex:(index % [colors count])];
+    *red = color.red;
+    *green = color.green;
+    *blue = color.blue;
+    return;
+  }
   int i = 6 - index;
 	*red = 0.5 + 0.5 * cos(i);
 	*green = 0.5 + 0.5 * sin(i);
