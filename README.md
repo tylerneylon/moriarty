@@ -64,6 +64,21 @@ This is a wipe animation (you can do them in other directions than this):
 
 [Here's the post about this class.](http://bynomial.com/blog/?p=130)
 
+LineView
+--------
+
+A UIView subclass for rending a single line between any two points.
+Yes, you can do this with Quartz; this is easier to use if you just want a few
+visual lines without diving down into CGContextStuff functions (CG = Core Graphics).
+
+Example:
+
+    LineView *lineView = [LineView lineFromPoint:CGPointZero toPoint:CGPointMake(20, 30)];
+    [self.view addSubview:lineView];
+
+[Here's the relevant blog post.](http://bynomial.com/blog/?p=133)
+
+
 uncrustify.cfg
 --------------
 
