@@ -61,17 +61,9 @@
                        initWithObjects:nFloat(0.0), nil];
 		sliceNames = [NSMutableArray new];
 		nameLabels = [NSMutableArray new];
-		
-		fontSize = frame.size.width / 20;
-		if (fontSize < 9) fontSize = 9;
-		
-		// Compute the center & radius of the circle.
-		centerX = frame.size.width / 2.0;
-		centerY = frame.size.height / 2.0;
-		radius = centerX < centerY ? centerX : centerY;
-		radius *= kRadiusPortion;
-		
 		colorspace = CGColorSpaceCreateDeviceRGB();
+    
+    self.frame = frame;
   }
   return self;
 }
@@ -84,6 +76,19 @@
 	CFRelease(colorspace);
   self.colors = nil;
   [super dealloc];
+}
+
+- (void)setFrame:(CGRect)frame {
+  [super setFrame:frame];
+  
+  fontSize = frame.size.width / 20;
+  if (fontSize < 9) fontSize = 9;
+  
+  // Compute the center & radius of the circle.
+  centerX = frame.size.width / 2.0;
+  centerY = frame.size.height / 2.0;
+  radius = centerX < centerY ? centerX : centerY;
+  radius *= kRadiusPortion;
 }
 
 - (void)addSlicePortion:(float)slicePortion withName:(NSString *)name {
