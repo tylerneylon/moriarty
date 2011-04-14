@@ -89,6 +89,7 @@
   centerY = frame.size.height / 2.0;
   radius = centerX < centerY ? centerX : centerY;
   radius *= kRadiusPortion;
+  [self setNeedsDisplay];
 }
 
 - (void)addSlicePortion:(float)slicePortion withName:(NSString *)name {
