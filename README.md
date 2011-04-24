@@ -78,6 +78,12 @@ Example:
 
 [Here's the relevant blog post.](http://bynomial.com/blog/?p=133)
 
+CArray
+------
+
+A struct and collection of C functions to act as a fast, low-level replacement for
+NSMutableArray.  Only appropriate in extremely time-sensitive code.  [Here's the post
+about CArray.](http://bynomial.com/blog/?p=137)
 
 uncrustify.cfg
 --------------
