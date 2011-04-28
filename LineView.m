@@ -43,6 +43,7 @@ static float max(float a, float b) {
   b = b_;
   self.color = [UIColor blackColor];
   self.backgroundColor = [UIColor clearColor];
+  self.userInteractionEnabled = NO;
   lineWidth = 2;
   
   return self;
