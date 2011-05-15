@@ -51,21 +51,31 @@
 	return chart;
 }
 
-- (id)initWithFrame:(CGRect)frame {
-  if (self = [super initWithFrame:frame]) {
+- (void) initInstance {
     // Initialization code
-		self.backgroundColor = [UIColor clearColor];
-		self.opaque = NO;
-		self.slicePortions = [NSMutableArray new];
-		slicePointsIn01 = [[NSMutableArray alloc]
+    self.backgroundColor = [UIColor clearColor];
+    self.opaque = NO;
+    self.slicePortions = [NSMutableArray new];
+    slicePointsIn01 = [[NSMutableArray alloc]
                        initWithObjects:nFloat(0.0), nil];
-		sliceNames = [NSMutableArray new];
-		nameLabels = [NSMutableArray new];
-		colorspace = CGColorSpaceCreateDeviceRGB();
-    
-    self.frame = frame;
-  }
-  return self;
+    sliceNames = [NSMutableArray new];
+    nameLabels = [NSMutableArray new];
+    colorspace = CGColorSpaceCreateDeviceRGB();    
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    if ((self = [super initWithFrame:frame])) {
+        [self initInstance];
+        self.frame = frame;    
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder: aDecoder])) {
+        [self initInstance];
+    }
+    return self;
 }
 
 - (void)dealloc {
