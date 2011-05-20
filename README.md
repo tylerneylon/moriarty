@@ -78,6 +78,16 @@ Example:
 
 [Here's the relevant blog post.](http://bynomial.com/blog/?p=133)
 
+NSString+HMAC
+-------------
+
+Adds the method hmacWithKey: to NSString, which uses SHA256 to
+produce an authentication code (the HMAC).  Use it like this:
+
+    NSString *key = @"a9bk342nziAFD234";  // Your private key.
+    NSString *hmac = [messageStr hmacWithKey:key];
+    // Now send the hmac with the message, and the server can authenticate.
+
 CArray
 ------
 
