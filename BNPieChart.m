@@ -19,8 +19,10 @@
 
 #define nFloat(x) [NSNumber numberWithFloat:x]
 
+// Declare private methods.
 @interface BNPieChart ()
 
+- (void)initInstance;
 - (void)drawSlice:(int)index inContext:(CGContextRef)context;
 - (CGGradientRef)newGradientForIndex:(int)index;
 - (void)addLabelForLastName;
@@ -51,31 +53,19 @@
 	return chart;
 }
 
-- (void) initInstance {
-    // Initialization code
-    self.backgroundColor = [UIColor clearColor];
-    self.opaque = NO;
-    self.slicePortions = [NSMutableArray new];
-    slicePointsIn01 = [[NSMutableArray alloc]
-                       initWithObjects:nFloat(0.0), nil];
-    sliceNames = [NSMutableArray new];
-    nameLabels = [NSMutableArray new];
-    colorspace = CGColorSpaceCreateDeviceRGB();    
-}
-
 - (id)initWithFrame:(CGRect)frame {
-    if ((self = [super initWithFrame:frame])) {
-        [self initInstance];
-        self.frame = frame;    
-    }
-    return self;
+  if (self = [super initWithFrame:frame]) {
+    [self initInstance];
+    self.frame = frame;    
+  }
+  return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    if ((self = [super initWithCoder: aDecoder])) {
-        [self initInstance];
-    }
-    return self;
+  if (self = [super initWithCoder:aDecoder]) {
+    [self initInstance];
+  }
+  return self;
 }
 
 - (void)dealloc {
@@ -157,6 +147,18 @@
 
 
 #pragma mark private methods
+
+- (void)initInstance {
+  // Initialization code
+  self.backgroundColor = [UIColor clearColor];
+  self.opaque = NO;
+  self.slicePortions = [NSMutableArray new];
+  slicePointsIn01 = [[NSMutableArray alloc]
+                     initWithObjects:nFloat(0.0), nil];
+  sliceNames = [NSMutableArray new];
+  nameLabels = [NSMutableArray new];
+  colorspace = CGColorSpaceCreateDeviceRGB();    
+}
 
 - (void)drawSlice:(int)index inContext:(CGContextRef)context {
 	CGFloat startAngle = 2 * M_PI * [self pointAtIndex:index];
