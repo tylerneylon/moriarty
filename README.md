@@ -88,6 +88,14 @@ produce an authentication code (the HMAC).  Use it like this:
     NSString *hmac = [messageStr hmacWithKey:key];
     // Now send the hmac with the message, and the server can authenticate.
 
+CodeTimestamps
+--------------
+
+This is a set of macros that can provide line-by-line, nanosecond-resolution
+timing information for your app.
+[Here's the post about CodeTimestamps.]
+(http://eng.pulse.me/line-by-line-speed-analysis-for-ios-apps/)
+
 CArray
 ------
 
