@@ -21,16 +21,24 @@
  @private
   // strong
   UIColor *color;
+  UIColor *shadowColor;
   
   CGFloat lineWidth;
   CGPoint a;
   CGPoint b;
+  
+  BOOL drawShadow;
+  CGSize shadowOffset;
+  CGFloat shadowBlurRadius;
+  // This defaults to 1; increase for heavier shadowing.
+  int shadowMultiplicity;
 }
 
 @property (nonatomic, retain) UIColor *color;
 @property (nonatomic) CGFloat lineWidth;
 @property (nonatomic, readonly) CGPoint a;
 @property (nonatomic, readonly) CGPoint b;
+@property (nonatomic) int shadowMultiplicity;
 
 + (LineView *)lineFromPoint:(CGPoint)a toPoint:(CGPoint)b;
 
@@ -39,5 +47,7 @@
 // when placed with frameOrigin = (0,0), the line will have
 // the coordinates given in the constructor.
 - (UIImage *)getImage;
+
+- (void)setShadowOffset:(CGSize)offset blurRadius:(CGFloat)blurRadius color:(UIColor *)color;
 
 @end

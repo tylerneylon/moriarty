@@ -24,6 +24,8 @@ static float max(float a, float b) {
 
 @interface LineView ()
 
+@property (nonatomic, retain) UIColor *shadowColor;
+
 - (void)drawWithOffset:(CGPoint)offset;
 
 @end
@@ -46,11 +48,14 @@ static float max(float a, float b) {
   self.userInteractionEnabled = NO;
   lineWidth = 2;
   
+  shadowMultiplicity = 1;
+  
   return self;
 }
 
 - (void)dealloc {
   self.color = nil;
+  self.shadowColor = nil;
   [super dealloc];
 }
 
@@ -67,6 +72,14 @@ static float max(float a, float b) {
   return image;
 }
 
+- (void)setShadowOffset:(CGSize)offset blurRadius:(CGFloat)blurRadius color:(UIColor *)color_ {
+  drawShadow = YES;
+  shadowOffset = offset;
+  shadowBlurRadius = blurRadius;
+  self.shadowColor = color_;
+  [self setNeedsDisplay];
+}
+
 - (void)setColor:(UIColor *)newColor {
   if (color == newColor) return;
   [color release];
@@ -80,16 +93,33 @@ static float max(float a, float b) {
   [self setNeedsDisplay];
 }
 
+- (void)setShadowMultiplicity:(int)newShadowMultiplicity {
+  if (shadowMultiplicity == newShadowMultiplicity) return;
+  shadowMultiplicity = newShadowMultiplicity;
+  [self setNeedsDisplay];
+}
+
 #pragma mark UIView methods
 
 - (void)drawRect:(CGRect)rect {
   [self drawWithOffset:self.frameOrigin];
+  if (drawShadow && shadowMultiplicity > 1) {
+    for (int i = 1; i < shadowMultiplicity; ++i) {
+      [self drawWithOffset:self.frameOrigin];
+    }
+  }
 }
 
 #pragma mark private methods
 
+@synthesize shadowColor;
+
 - (void)drawWithOffset:(CGPoint)offset {
   CGContextRef ctx = UIGraphicsGetCurrentContext();
+  
+  if (drawShadow) {
+    CGContextSetShadowWithColor(ctx, shadowOffset, shadowBlurRadius, shadowColor.CGColor);
+  }
   
   CGContextSetLineWidth(ctx, lineWidth);
   [color setStroke];
