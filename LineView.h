@@ -29,6 +29,8 @@
 
 @property (nonatomic, retain) UIColor *color;
 @property (nonatomic) CGFloat lineWidth;
+@property (nonatomic, readonly) CGPoint a;
+@property (nonatomic, readonly) CGPoint b;
 
 + (LineView *)lineFromPoint:(CGPoint)a toPoint:(CGPoint)b;
 
