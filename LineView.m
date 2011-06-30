@@ -35,6 +35,7 @@ static float max(float a, float b) {
 @implementation LineView
 
 @synthesize color, lineWidth, a, b;
+@synthesize shadowMultiplicity;
 
 - (id)initFromPoint:(CGPoint)a_ toPoint:(CGPoint)b_ {
   CGRect frame = CGRectMake(min(a_.x, b_.x) - kPadding, min(a_.y, b_.y) - kPadding,
