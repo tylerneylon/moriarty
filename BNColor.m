@@ -92,6 +92,12 @@
   [self setWithHue:h saturation:s value:v];
 }
 
+- (float)lightness {
+  float min, max;
+  [self findMin:&min max:&max];
+  return (min + max) / 2.0;
+}
+
 - (void)setWithHue:(float)h saturation:(float)s value:(float)v {
   int interval = h * 5.9999;  // Keep it in [0,6).
   float f = h * 5.9999 - interval;
@@ -223,6 +229,12 @@
   return [BNColor colorWithRed:1 green:1 blue:1];
 }
 
++ (BNColor *)randomBrightColor {
+  BNColor *color = [BNColor beInit];
+  float hue = (float)rand() / RAND_MAX;
+  [color setWithHue:hue saturation:1 value:1];
+  return color;
+}
 
 #pragma mark NSCopying methods
 

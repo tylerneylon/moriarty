@@ -28,6 +28,10 @@
 @property (nonatomic) float saturation;
 @property (nonatomic) float value;
 
+@property (nonatomic, readonly) float lightness;
+
+@property (nonatomic, readonly) UIColor *UIColor;
+
 + (BNColor *)colorWithRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue;
 + (BNColor *)colorFromRGBHexString:(NSString *)rgbString;
 
@@ -58,5 +62,8 @@
 + (BNColor *)darkGrayColor;
 + (BNColor *)lightGrayColor;
 + (BNColor *)whiteColor;
+
+// Picks hue randomly, sat = 1.0, value = 1.0
++ (BNColor *)randomBrightColor;
 
 @end
