@@ -13,6 +13,11 @@
 #define kGreenKey @"g"
 #define kBlueKey @"b"
 
+#define IMPL_NAMED_COLOR(name, r, g, b) \
++ (BNColor *)name { \
+  return [BNColor colorWithRed:r green:g blue:b]; \
+}
+
 @interface BNColor ()
 
 - (void)findMin:(float *)min max:(float *)max;
@@ -177,57 +182,19 @@
 
 #pragma mark named colors
 
-+ (BNColor *)redColor {
-  return [BNColor colorWithRed:1 green:0 blue:0];
-}
-
-+ (BNColor *)orangeColor {
-  return [BNColor colorWithRed:1 green:0.5 blue:0];
-}
-
-+ (BNColor *)yellowColor {
-  return [BNColor colorWithRed:1 green:1 blue:0];
-}
-
-+ (BNColor *)greenColor {
-  return [BNColor colorWithRed:0 green:1 blue:0];
-}
-
-+ (BNColor *)blueColor {
-  return [BNColor colorWithRed:0 green:0 blue:1];
-}
-
-+ (BNColor *)purpleColor {
-  return [BNColor colorWithRed:0.5 green:0 blue:0.5];
-}
-
-+ (BNColor *)magentaColor {
-  return [BNColor colorWithRed:1 green:0 blue:1];
-}
-
-+ (BNColor *)cyanColor {
-  return [BNColor colorWithRed:0 green:1 blue:1];
-}
-
-+ (BNColor *)brownColor {
-  return [BNColor colorWithRed:0.6 green:0.4 blue:0.2];
-}
-
-+ (BNColor *)blackColor {
-  return [BNColor colorWithRed:0 green:0 blue:0];
-}
-
-+ (BNColor *)darkGrayColor {
-  return [BNColor colorWithRed:1.0/3.0 green:1.0/3.0 blue:1.0/3.0];
-}
-
-+ (BNColor *)lightGrayColor {
-  return [BNColor colorWithRed:2.0/3.0 green:2.0/3.0 blue:2.0/3.0];
-}
-
-+ (BNColor *)whiteColor {
-  return [BNColor colorWithRed:1 green:1 blue:1];
-}
+IMPL_NAMED_COLOR(redColor, 1, 0, 0)
+IMPL_NAMED_COLOR(orangeColor, 1, 0.5, 0)
+IMPL_NAMED_COLOR(yellowColor, 1, 1, 0)
+IMPL_NAMED_COLOR(greenColor, 0, 1, 0)
+IMPL_NAMED_COLOR(blueColor, 0, 0, 1)
+IMPL_NAMED_COLOR(purpleColor, 0.5, 0, 0.5)
+IMPL_NAMED_COLOR(magentaColor, 1, 0, 1)
+IMPL_NAMED_COLOR(cyanColor, 0, 1, 1)
+IMPL_NAMED_COLOR(brownColor, 0.6, 0.4, 0.2)
+IMPL_NAMED_COLOR(blackColor, 0, 0, 0)
+IMPL_NAMED_COLOR(darkGrayColor, 1.0/3.0, 1.0/3.0, 1.0/3.0)
+IMPL_NAMED_COLOR(lightGrayColor, 2.0/3.0, 2.0/3.0, 2.0/3.0)
+IMPL_NAMED_COLOR(whiteColor, 1, 1, 1)
 
 + (BNColor *)randomBrightColor {
   BNColor *color = [BNColor beInit];
