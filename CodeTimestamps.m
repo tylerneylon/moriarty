@@ -8,6 +8,15 @@
 //    http://developer.apple.com/library/mac/#qa/qa2004/qa1398.html
 //
 
+// This code would be cleaner if it used NSObject+Be for memory
+// management, but I've decided to use standard methods instead,
+// to make it easier to use CodeTimestamps.{h,m} on their own.
+
+// I'm also aware that the Build & Analyze tool produces some warnings
+// for this code, but I've examined them and I don't think they're legit problems.
+// I would like to tweak things to get rid of the warnings with zero performance
+// cost, but that's a low priority for me, so I may not do it anytime soon.
+
 #import "CodeTimestamps.h"
 
 #import <mach/mach.h>
@@ -92,7 +101,7 @@ void InitChunkData() {
 void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BOOL isEnd) {
   OneTimeCall(InitChunkData());
   OneTimeCall([[LogHelper sharedInstance] startLoggingTimer]);
-  ChunkStamp *stamp = [ChunkStamp beInit];
+  ChunkStamp *stamp = [[ChunkStamp new] autorelease];
   stamp->fnName = fnName;
   stamp->lineNum = lineNum;
   stamp->timestamp = mach_absolute_time();
@@ -205,7 +214,7 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
           thisThreadHadChunks = YES;
           chunkName = [NSString stringWithFormat:@"%s:%d", chunkStamp->fnName, chunkStamp->lineNum];
         } else if (midChunk) {
-          ChunkTimeInterval *timeInterval = [[ChunkTimeInterval be] initFromStamp:lastStamp toStamp:chunkStamp];
+          ChunkTimeInterval *timeInterval = [[[ChunkTimeInterval alloc] initFromStamp:lastStamp toStamp:chunkStamp] autorelease];
           [timeIntervals addObject:timeInterval];
           totalNanoSecsThisChunk += timeInterval->nanoSecsElapsed;
           if (chunkStamp->isEnd) {
@@ -221,7 +230,7 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
               NSLog(@"    %2d%% in %@", percentTime, timeInterval->intervalName);
             }
             
-            ChunkTimeInterval *totalInterval = [ChunkTimeInterval beInit];
+            ChunkTimeInterval *totalInterval = [[ChunkTimeInterval new] autorelease];
             totalInterval->intervalName = [chunkName retain];
             totalInterval->nanoSecsElapsed = totalNanoSecsThisChunk;
             [self maybeAddTimeIntervalAsSlowest:totalInterval];
@@ -255,7 +264,7 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
   if ([slowestChunks count] < kNumSlowestChunks ||
       ((ChunkTimeInterval *)[slowestChunks lastObject])->nanoSecsElapsed < timeInterval->nanoSecsElapsed) {
     [slowestChunks addObject:timeInterval];
-    NSSortDescriptor *sortByTime = [[NSSortDescriptor be] initWithKey:@"nanoSecsElapsed" ascending:NO];
+    NSSortDescriptor *sortByTime = [[[NSSortDescriptor alloc] initWithKey:@"nanoSecsElapsed" ascending:NO] autorelease];
     [slowestChunks sortUsingDescriptors:[NSArray arrayWithObject:sortByTime]];
     if ([slowestChunks count] > kNumSlowestChunks) [slowestChunks removeLastObject];
   }
@@ -270,7 +279,7 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
 }
 
 - (void)consolidateTimeIntervals:(NSMutableArray *)timeIntervals {
-  NSSortDescriptor *sortByName = [[NSSortDescriptor be] initWithKey:@"intervalName" ascending:YES];
+  NSSortDescriptor *sortByName = [[[NSSortDescriptor alloc] initWithKey:@"intervalName" ascending:YES] autorelease];
   [timeIntervals sortUsingDescriptors:[NSArray arrayWithObject:sortByName]];
   
   NSMutableArray *consolidatedIntervals = [NSMutableArray array];
@@ -280,7 +289,7 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
     if ([lastName isEqualToString:timeInterval->intervalName]) {
       thisInterval->nanoSecsElapsed += timeInterval->nanoSecsElapsed;
     } else {
-      thisInterval = [ChunkTimeInterval beInit];
+      thisInterval = [[ChunkTimeInterval new] autorelease];
       thisInterval->intervalName = [timeInterval->intervalName retain];
       thisInterval->nanoSecsElapsed = timeInterval->nanoSecsElapsed;
       [consolidatedIntervals addObject:thisInterval];
@@ -290,7 +299,7 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
   [timeIntervals removeAllObjects];
   [timeIntervals addObjectsFromArray:consolidatedIntervals];
   
-  NSSortDescriptor *sortByTime = [[NSSortDescriptor be] initWithKey:@"nanoSecsElapsed" ascending:NO];
+  NSSortDescriptor *sortByTime = [[[NSSortDescriptor alloc] initWithKey:@"nanoSecsElapsed" ascending:NO] autorelease];
   [timeIntervals sortUsingDescriptors:[NSArray arrayWithObject:sortByTime]];
 }
 
