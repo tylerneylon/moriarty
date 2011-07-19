@@ -340,4 +340,12 @@ float dist(float x1, float y1, float x2, float y2) {
 	return [(NSNumber*)[slicePointsIn01 objectAtIndex:index] floatValue];
 }
 
+- (void)reset {
+    [sliceNames removeAllObjects];
+    [nameLabels removeAllObjects];
+    [slicePortions removeAllObjects];
+    [slicePointsIn01 removeAllObjects], [slicePointsIn01 addObject:nFloat(0.0)];
+    [self setNeedsDisplay];
+}
+
 @end

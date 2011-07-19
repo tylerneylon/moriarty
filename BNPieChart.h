@@ -60,4 +60,7 @@
 // Creates a sample pie chart in the given frame.
 + (BNPieChart *)pieChartSampleWithFrame:(CGRect)frame;
 
+// Removes all slices
+- (void)reset;
+
 @end
