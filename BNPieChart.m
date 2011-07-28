@@ -152,7 +152,7 @@
   // Initialization code
   self.backgroundColor = [UIColor clearColor];
   self.opaque = NO;
-  self.slicePortions = [NSMutableArray new];
+  self.slicePortions = [[NSMutableArray new] autorelease];
   slicePointsIn01 = [[NSMutableArray alloc]
                      initWithObjects:nFloat(0.0), nil];
   sliceNames = [NSMutableArray new];
