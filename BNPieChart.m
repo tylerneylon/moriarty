@@ -123,6 +123,8 @@
   }
   CGContextEndTransparencyLayer(context);
   CGContextRestoreGState(context);
+
+    /*
 	
 	// Draw the glare.
 	CGContextBeginPath(context);
@@ -143,6 +145,7 @@
 								CGPointMake(centerX + radius * 0.6, centerY + radius * 0.6),
 								CGPointMake(centerX - radius, centerY - radius), 0);
 	CGGradientRelease(gradient);
+     */
 }
 
 
