@@ -225,9 +225,9 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
             
             [self consolidateTimeIntervals:timeIntervals];
             for (int i = 0; i < [timeIntervals count] && i < kNumMidPoints; ++i) {
-              ChunkTimeInterval *timeInterval = [timeIntervals objectAtIndex:i];
-              int percentTime = (int)round(100.0 * (float)timeInterval->nanoSecsElapsed / totalNanoSecsThisChunk);
-              NSLog(@"    %2d%% in %@", percentTime, timeInterval->intervalName);
+              ChunkTimeInterval *individualTimeInterval = [timeIntervals objectAtIndex:i];
+              int percentTime = (int)round(100.0 * (float)individualTimeInterval->nanoSecsElapsed / totalNanoSecsThisChunk);
+              NSLog(@"    %2d%% in %@", percentTime, individualTimeInterval->intervalName);
             }
             
             ChunkTimeInterval *totalInterval = [[ChunkTimeInterval new] autorelease];
