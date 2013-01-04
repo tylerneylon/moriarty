@@ -243,7 +243,7 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
         lastStamp = chunkStamp;
       }
       if (thisThreadHadChunks) {
-        NSLog(@"++ Chunk = %@, avg time = %d nsec", chunkName,
+        NSLog(@"++ Chunk = %@, avg time = %lld nsec", chunkName,
               totalNanoSecsThisThread / numRunsThisThread);
       }
       [chunkData removeAllObjects];
