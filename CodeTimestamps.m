@@ -213,7 +213,8 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
           midChunk = YES;
           thisThreadHadChunks = YES;
           chunkName = [NSString stringWithFormat:@"%s:%d", chunkStamp->fnName, chunkStamp->lineNum];
-        } else if (midChunk) {
+        }
+        else if (midChunk) {
           ChunkTimeInterval *timeInterval = [[[ChunkTimeInterval alloc] initFromStamp:lastStamp toStamp:chunkStamp] autorelease];
           [timeIntervals addObject:timeInterval];
           totalNanoSecsThisChunk += timeInterval->nanoSecsElapsed;
@@ -242,7 +243,7 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
         }
         lastStamp = chunkStamp;
       }
-      if (thisThreadHadChunks) {
+      if (thisThreadHadChunks && (numRunsThisThread != 0)) {
         NSLog(@"++ Chunk = %@, avg time = %lld nsec", chunkName,
               totalNanoSecsThisThread / numRunsThisThread);
       }
