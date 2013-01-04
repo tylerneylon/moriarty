@@ -183,9 +183,9 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
       [chunkData sortUsingSelector:@selector(compare:)];
       NSThread *thread = nil;
       NSMutableArray *timeIntervals = [NSMutableArray array];
-      uint64_t totalNanoSecsThisChunk;
-      uint64_t totalNanoSecsThisThread;
-      int numRunsThisThread;
+      uint64_t totalNanoSecsThisChunk=0;
+      uint64_t totalNanoSecsThisThread=0;
+      int numRunsThisThread=0;
       BOOL thisThreadHadChunks = NO;
       BOOL midChunk = NO;
       ChunkStamp *lastStamp = nil;
