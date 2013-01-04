@@ -194,7 +194,7 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
         if (chunkStamp->thread != thread) {
           if (thisThreadHadChunks) {
             NSLog(@"++ Chunk = %@, avg time = %.4fs", chunkName,
-                  (float)totalNanoSecsThisThread / numRunsThisThread / 1e9);
+                  ((float)totalNanoSecsThisThread / numRunsThisThread) / 1e9);
           }
           
           thread = chunkStamp->thread;
