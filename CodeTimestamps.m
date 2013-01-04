@@ -123,10 +123,12 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
 
 @implementation ChunkTimeInterval
 - (id)initFromStamp:(ChunkStamp *)stamp1 toStamp:(ChunkStamp *)stamp2 {
-  if (![super init]) return nil;
-  intervalName = [[NSString stringWithFormat:@"%s:%d - %s:%d",
-                   stamp1->fnName, stamp1->lineNum, stamp2->fnName, stamp2->lineNum] retain];
-  nanoSecsElapsed = NanosecondsFromTimeInterval(stamp2->timestamp - stamp1->timestamp);
+  self = [super init];
+  if (self) {
+    intervalName = [[NSString stringWithFormat:@"%s:%d - %s:%d",
+                     stamp1->fnName, stamp1->lineNum, stamp2->fnName, stamp2->lineNum] retain];
+    nanoSecsElapsed = NanosecondsFromTimeInterval(stamp2->timestamp - stamp1->timestamp);
+  }
   return self;
 }
 - (void)dealloc {
@@ -149,9 +151,11 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
 }
 
 - (id)init {
-  if (![super init]) return nil;
-  pendingLines = [NSMutableArray new];
-  slowestChunks = [NSMutableArray new];
+  self = [super init];
+  if (self) {
+    pendingLines = [NSMutableArray new];
+    slowestChunks = [NSMutableArray new];
+  }
   return self;
 }
 
