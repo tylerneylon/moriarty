@@ -2,7 +2,7 @@
 //  UIView+Position.h
 //
 //  Created by Tyler Neylon on 3/19/10.
-//  Copyleft 2010 Bynomial.
+//  Copyright 2010 Bynomial.
 //
 //  These properties enable repositioning of a UIView
 //  by changing any single coordinate or size parameter.

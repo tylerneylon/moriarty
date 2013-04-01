@@ -2,7 +2,7 @@
 //  NSObject+Be.h
 //
 //  Created by Tyler Neylon on 6/15/09.
-//  Copyleft 2009 Bynomial.
+//  Copyright 2009 Bynomial.
 //
 //  Add the Be category to NSObject.
 //  The following common pattern:

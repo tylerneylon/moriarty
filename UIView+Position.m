@@ -2,7 +2,7 @@
 //  UIView+Position.m
 //
 //  Created by Tyler Neylon on 3/19/10.
-//  Copyleft 2010 Bynomial.
+//  Copyright 2010 Bynomial.
 //
 
 #import "UIView+position.h"

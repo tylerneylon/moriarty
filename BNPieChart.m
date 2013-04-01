@@ -3,7 +3,7 @@
 //  Survey
 //
 //  Created by Tyler Neylon on 10/1/09.
-//  Copyleft 2009 Bynomial.
+//  Copyright 2009 Bynomial.
 //
 
 #import "BNPieChart.h"

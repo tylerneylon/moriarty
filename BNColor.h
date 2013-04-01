@@ -2,7 +2,7 @@
 //  BNColor.h
 //
 //  Created by Tyler Neylon on 11/25/09.
-//  Copyleft 2009 Bynomial.
+//  Copyright 2009 Bynomial.
 //
 //  BNColor is a Bynomial Color class, meant to make
 //  it easier to deal interchangably with both

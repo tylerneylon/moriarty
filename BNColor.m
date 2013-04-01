@@ -2,7 +2,7 @@
 //  BNColor.m
 //
 //  Created by Tyler Neylon on 11/25/09.
-//  Copyleft 2009 Bynomial.
+//  Copyright 2009 Bynomial.
 //
 
 #import "BNColor.h"
