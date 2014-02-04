@@ -54,7 +54,7 @@
 }
 
 - (id)initWithFrame:(CGRect)frame {
-  if (self = [super initWithFrame:frame]) {
+  if ((self = [super initWithFrame:frame])) {
     [self initInstance];
     self.frame = frame;    
   }
@@ -62,7 +62,7 @@
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-  if (self = [super initWithCoder:aDecoder]) {
+  if ((self = [super initWithCoder:aDecoder])) {
     [self initInstance];
   }
   return self;
@@ -123,6 +123,8 @@
   }
   CGContextEndTransparencyLayer(context);
   CGContextRestoreGState(context);
+
+    /*
 	
 	// Draw the glare.
 	CGContextBeginPath(context);
@@ -143,6 +145,7 @@
 								CGPointMake(centerX + radius * 0.6, centerY + radius * 0.6),
 								CGPointMake(centerX - radius, centerY - radius), 0);
 	CGGradientRelease(gradient);
+     */
 }
 
 
@@ -152,7 +155,7 @@
   // Initialization code
   self.backgroundColor = [UIColor clearColor];
   self.opaque = NO;
-  self.slicePortions = [NSMutableArray new];
+  self.slicePortions = [[NSMutableArray new] autorelease];
   slicePointsIn01 = [[NSMutableArray alloc]
                      initWithObjects:nFloat(0.0), nil];
   sliceNames = [NSMutableArray new];
@@ -338,6 +341,15 @@ float dist(float x1, float y1, float x2, float y2) {
 - (float)pointAtIndex:(int)index {
 	index = (index + [slicePointsIn01 count]) % [slicePointsIn01 count];
 	return [(NSNumber*)[slicePointsIn01 objectAtIndex:index] floatValue];
+}
+
+- (void)reset {
+    [sliceNames removeAllObjects];
+    [nameLabels makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [nameLabels removeAllObjects];
+    [slicePortions removeAllObjects];
+    [slicePointsIn01 removeAllObjects], [slicePointsIn01 addObject:nFloat(0.0)];
+    [self setNeedsDisplay];
 }
 
 @end
