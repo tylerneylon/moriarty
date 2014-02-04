@@ -123,10 +123,12 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
 
 @implementation ChunkTimeInterval
 - (id)initFromStamp:(ChunkStamp *)stamp1 toStamp:(ChunkStamp *)stamp2 {
-  if (![super init]) return nil;
-  intervalName = [[NSString stringWithFormat:@"%s:%d - %s:%d",
-                   stamp1->fnName, stamp1->lineNum, stamp2->fnName, stamp2->lineNum] retain];
-  nanoSecsElapsed = NanosecondsFromTimeInterval(stamp2->timestamp - stamp1->timestamp);
+  self = [super init];
+  if (self) {
+    intervalName = [[NSString stringWithFormat:@"%s:%d - %s:%d",
+                     stamp1->fnName, stamp1->lineNum, stamp2->fnName, stamp2->lineNum] retain];
+    nanoSecsElapsed = NanosecondsFromTimeInterval(stamp2->timestamp - stamp1->timestamp);
+  }
   return self;
 }
 - (void)dealloc {
@@ -149,9 +151,11 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
 }
 
 - (id)init {
-  if (![super init]) return nil;
-  pendingLines = [NSMutableArray new];
-  slowestChunks = [NSMutableArray new];
+  self = [super init];
+  if (self) {
+    pendingLines = [NSMutableArray new];
+    slowestChunks = [NSMutableArray new];
+  }
   return self;
 }
 
@@ -183,9 +187,9 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
       [chunkData sortUsingSelector:@selector(compare:)];
       NSThread *thread = nil;
       NSMutableArray *timeIntervals = [NSMutableArray array];
-      uint64_t totalNanoSecsThisChunk;
-      uint64_t totalNanoSecsThisThread;
-      int numRunsThisThread;
+      uint64_t totalNanoSecsThisChunk=0;
+      uint64_t totalNanoSecsThisThread=0;
+      int numRunsThisThread=0;
       BOOL thisThreadHadChunks = NO;
       BOOL midChunk = NO;
       ChunkStamp *lastStamp = nil;
@@ -194,7 +198,7 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
         if (chunkStamp->thread != thread) {
           if (thisThreadHadChunks) {
             NSLog(@"++ Chunk = %@, avg time = %.4fs", chunkName,
-                  (float)totalNanoSecsThisThread / numRunsThisThread / 1e9);
+                  ((float)totalNanoSecsThisThread / numRunsThisThread) / 1e9);
           }
           
           thread = chunkStamp->thread;
@@ -213,7 +217,8 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
           midChunk = YES;
           thisThreadHadChunks = YES;
           chunkName = [NSString stringWithFormat:@"%s:%d", chunkStamp->fnName, chunkStamp->lineNum];
-        } else if (midChunk) {
+        }
+        else if (midChunk) {
           ChunkTimeInterval *timeInterval = [[[ChunkTimeInterval alloc] initFromStamp:lastStamp toStamp:chunkStamp] autorelease];
           [timeIntervals addObject:timeInterval];
           totalNanoSecsThisChunk += timeInterval->nanoSecsElapsed;
@@ -225,9 +230,9 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
             
             [self consolidateTimeIntervals:timeIntervals];
             for (int i = 0; i < [timeIntervals count] && i < kNumMidPoints; ++i) {
-              ChunkTimeInterval *timeInterval = [timeIntervals objectAtIndex:i];
-              int percentTime = (int)round(100.0 * (float)timeInterval->nanoSecsElapsed / totalNanoSecsThisChunk);
-              NSLog(@"    %2d%% in %@", percentTime, timeInterval->intervalName);
+              ChunkTimeInterval *individualTimeInterval = [timeIntervals objectAtIndex:i];
+              int percentTime = (int)round(100.0 * (float)individualTimeInterval->nanoSecsElapsed / totalNanoSecsThisChunk);
+              NSLog(@"    %2d%% in %@", percentTime, individualTimeInterval->intervalName);
             }
             
             ChunkTimeInterval *totalInterval = [[ChunkTimeInterval new] autorelease];
@@ -242,8 +247,8 @@ void LogTimestampChunkInMethod(const char *fnName, int lineNum, BOOL isStart, BO
         }
         lastStamp = chunkStamp;
       }
-      if (thisThreadHadChunks) {
-        NSLog(@"++ Chunk = %@, avg time = %d nsec", chunkName,
+      if (thisThreadHadChunks && (numRunsThisThread != 0)) {
+        NSLog(@"++ Chunk = %@, avg time = %lld nsec", chunkName,
               totalNanoSecsThisThread / numRunsThisThread);
       }
       [chunkData removeAllObjects];
